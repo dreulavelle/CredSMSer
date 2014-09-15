@@ -58,7 +58,6 @@ IF "%ERRORLEVEL%"=="1" (
 
 IF "%1"=="/l" (
 		SET USB=Yes
-		Echo USB=Yes
 		IF EXIST Saves\%Username%.txt DEL Saves\%Username%.txt /F /Q >nul 2>&1
 		IF NOT EXIST Saves\ MKDIR Saves\ >nul 2>&1
 ) Else (
