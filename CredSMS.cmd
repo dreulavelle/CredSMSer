@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 @echo off
 CLS
 
@@ -19,6 +19,8 @@ SET To=phonenumber@tmomail.net
 ::	 	Straight Talk = @vtext.com
 :: 		Cricket = @sms.mycricket.com
 :: 		Boost = @myboostmobile.com
+::
+::		As a side note, E-Mails work as well :)
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -111,9 +113,11 @@ call repl.bat "%search%" "%replace%" L < "%textfile%" >"%newfile%"
 :: Assign LoginDetails.txt to a Variable
 FOR /F "Tokens=*" %%a in ('type %Temp%\LoginDetails.txt') DO SET S=%%a
 
-IF EXIST %Temp%\LoginDetails.txt (
-	Echo Credential's Missing.
-	Echo Exiting. 
+IF NOT EXIST %Temp%\LoginDetails.txt (
+	CC 1C
+	Echo     Credential's Missing!
+	CC 1A
+	Echo  Exiting. 
 	Pause >nul
 	Exit
 )
