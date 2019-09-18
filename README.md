@@ -26,13 +26,11 @@ Usage:
 
 To-Do List:
 
-1. Add Support for AT&T, Verizon, and Sprint.
-2. Make the GUI Smaller/slimmer
-3. Possible 'Silent' switch?
-4. Adding variables for easy running (%1 being email and %2 being password)
+1. Make the GUI Smaller/slimmer
+2. Possible 'Silent' switch?
+3. Adding variables for easy running (%1 being email and %2 being password)
 
 Changelog:
-
 1.0:
 Added Support for multiple carriers.
 
